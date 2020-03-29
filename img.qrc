@@ -1,0 +1,11 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource>
+    
+    <file>img/CPU2.png</file>
+    <file>img/Homee.png</file>
+    <file>img/ZoomIn.png</file>
+    <file>img/ZoomOut.png</file>
+ 
+</qresource>
+</RCC>
