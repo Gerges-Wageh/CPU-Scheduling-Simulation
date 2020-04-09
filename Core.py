@@ -222,23 +222,24 @@ class Main(QMainWindow , MainUI):
         self.tabWidget.setCurrentIndex(8)
 
     def Show_info_Table_FCFS(self):
-        scene = QtWidgets.QGraphicsScene()
-        self.graphicsView.setScene(scene)
-        self.lineEdit_2.clear()
-        number_str = self.lineEdit.text()
-        if number_str != '' and int(number_str) > 0:
-            try:
-                n = int(number_str)
-                for i in range(n):
-                    self.tableWidget_3.setRowCount(i)
-                    self.tableWidget_3.insertRow(i)
-                    self.tableWidget_3.setItem(0, i, QTableWidgetItem(str('')))
-            except:
+        try:
+            scene = QtWidgets.QGraphicsScene()
+            self.graphicsView.setScene(scene)
+            self.lineEdit_2.clear()
+            number_str = self.lineEdit.text()
+            if number_str != '' and int(number_str) > 0:
+                try:
+                    n = int(number_str)
+                    for i in range(n):
+                        self.tableWidget_3.setRowCount(i)
+                        self.tableWidget_3.insertRow(i)
+                        self.tableWidget_3.setItem(0, i, QTableWidgetItem(str('')))
+                except:
+                    QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+            else:
                 QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
-        else:
-            QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
-
-
+        except:
+            QMessageBox.information(self, "Warning", "Invalid input, make sure  processes number is not float or empty!")
 
     def FCSF_Algorithm(self):
         try:
@@ -251,13 +252,18 @@ class Main(QMainWindow , MainUI):
             timer = Decimal('0.00')
             s = 0
             for i in range(n):
-                processes.append(self.tableWidget_3.item(i, 0).text())
-                if int(self.tableWidget_3.item(i, 1).text()) >= 0:
+                if self.tableWidget_3.item(i, 0).text() not in processes:
+                    processes.append(self.tableWidget_3.item(i, 0).text())
+                else:
+                    QMessageBox.information(self, "Warning", "Repeated processes are not allowed !")
+                    return
+                if Decimal(self.tableWidget_3.item(i, 1).text()) >= 0:
                     arrival_time.append(Decimal(self.tableWidget_3.item(i, 1).text()))
+
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, Please enter positive 'Arrival Time' !")
                     return
-                if int(self.tableWidget_3.item(i, 2).text()) > 0:
+                if Decimal(self.tableWidget_3.item(i, 2).text()) > 0:
                     burst_time.append(Decimal(self.tableWidget_3.item(i, 2).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, 'Burst Time' must be higher than '0' !")
@@ -325,21 +331,24 @@ class Main(QMainWindow , MainUI):
 
 
     def Show_Info_Table_SJF_NP(self):
-        scene = QtWidgets.QGraphicsScene()
-        self.graphicsView_3.setScene(scene)
-        self.lineEdit_6.clear()
-        number_str = self.lineEdit_5.text()
-        if number_str != '' and int(number_str) > 0:
-            try:
-                n = int(number_str)
-                for i in range(n):
-                    self.tableWidget_5.setRowCount(i)
-                    self.tableWidget_5.insertRow(i)
-                    self.tableWidget_5.setItem(0, i, QTableWidgetItem(str('')))
-            except:
+        try:
+            scene = QtWidgets.QGraphicsScene()
+            self.graphicsView_3.setScene(scene)
+            self.lineEdit_6.clear()
+            number_str = self.lineEdit_5.text()
+            if number_str != '' and int(number_str) > 0:
+                try:
+                    n = int(number_str)
+                    for i in range(n):
+                        self.tableWidget_5.setRowCount(i)
+                        self.tableWidget_5.insertRow(i)
+                        self.tableWidget_5.setItem(0, i, QTableWidgetItem(str('')))
+                except:
+                    QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+            else:
                 QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
-        else:
-            QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+        except:
+            QMessageBox.information(self, "Warning", "Invalid input, make sure  processes number is not float or empty!")
 
 
 
@@ -355,13 +364,17 @@ class Main(QMainWindow , MainUI):
             timer = Decimal('0.00')
             s = 0
             for i in range(n):
-                processes.append(self.tableWidget_5.item(i, 0).text())
-                if int(self.tableWidget_5.item(i, 1).text()) >= 0:
+                if self.tableWidget_5.item(i, 0).text() not in processes:
+                    processes.append(self.tableWidget_5.item(i, 0).text())
+                else:
+                    QMessageBox.information(self, "Warning", "Repeated processes are not allowed !")
+                    return
+                if Decimal(self.tableWidget_5.item(i, 1).text()) >= 0:
                     arrival_time.append(Decimal(self.tableWidget_5.item(i, 1).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, Please enter positive 'Arrival Time' !")
                     return
-                if int(self.tableWidget_5.item(i, 2).text()) > 0:
+                if Decimal(self.tableWidget_5.item(i, 2).text()) > 0:
                     burst_time.append(Decimal(self.tableWidget_5.item(i, 2).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, 'Burst Time' must be higher than '0' !")
@@ -450,21 +463,24 @@ class Main(QMainWindow , MainUI):
 
 
     def Show_Info_Table_Priority_NP(self):
-        scene = QtWidgets.QGraphicsScene()
-        self.graphicsView_5.setScene(scene)
-        self.lineEdit_10.clear()
-        number_str = self.lineEdit_9.text()
-        if number_str != '' and int(number_str) > 0:
-            try:
-                n = int(number_str)
-                for i in range(n):
-                    self.tableWidget_7.setRowCount(i)
-                    self.tableWidget_7.insertRow(i)
-                    self.tableWidget_7.setItem(0, i, QTableWidgetItem(str('')))
-            except:
+        try:
+            scene = QtWidgets.QGraphicsScene()
+            self.graphicsView_5.setScene(scene)
+            self.lineEdit_10.clear()
+            number_str = self.lineEdit_9.text()
+            if number_str != '' and int(number_str) > 0:
+                try:
+                    n = int(number_str)
+                    for i in range(n):
+                        self.tableWidget_7.setRowCount(i)
+                        self.tableWidget_7.insertRow(i)
+                        self.tableWidget_7.setItem(0, i, QTableWidgetItem(str('')))
+                except:
+                    QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+            else:
                 QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
-        else:
-            QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+        except:
+            QMessageBox.information(self, "Warning", "Invalid input, make sure  processes number is not float or empty!")
 
     def Priority_NP_Algorithm(self):
         try:
@@ -479,19 +495,23 @@ class Main(QMainWindow , MainUI):
             timer = Decimal('0.00')
             s = 0
             for i in range(n):
-                processes.append(self.tableWidget_7.item(i, 0).text())
-                if int(self.tableWidget_7.item(i, 1).text()) >= 0:
+                if self.tableWidget_7.item(i, 0).text() not in processes:
+                    processes.append(self.tableWidget_7.item(i, 0).text())
+                else:
+                    QMessageBox.information(self, "Warning", "Repeated processes are not allowed !")
+                    return
+                if Decimal(self.tableWidget_7.item(i, 1).text()) >= 0:
                     arrival_time.append(Decimal(self.tableWidget_7.item(i, 1).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, Please enter positive 'Arrival Time' !")
                     return
-                if int(self.tableWidget_7.item(i, 2).text()) > 0:
+                if Decimal(self.tableWidget_7.item(i, 2).text()) > 0:
                     burst_time.append(Decimal(self.tableWidget_7.item(i, 2).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, 'Burst Time' must be higher than '0' !")
                     return
-                if int(self.tableWidget_7.item(i, 3).text()) > 0:
-                    priority.append(int(self.tableWidget_7.item(i, 3).text()))
+                if Decimal(self.tableWidget_7.item(i, 3).text()) > 0:
+                    priority.append(Decimal(self.tableWidget_7.item(i, 3).text()))
                 else:
                     QMessageBox.information(self, "Warning", " Invalid input, 'Burst time' and 'Priority' must be higher than '0' !")
                     return
@@ -585,21 +605,24 @@ class Main(QMainWindow , MainUI):
 
 
     def Show_Info_Table_RR(self):
-        scene = QtWidgets.QGraphicsScene()
-        self.graphicsView_2.setScene(scene)
-        self.lineEdit_4.clear()
-        number_str = self.lineEdit_3.text()
-        if number_str != '' and int(number_str) > 0:
-            try:
-                n = int(number_str)
-                for i in range(n):
-                    self.tableWidget_9.setRowCount(i)
-                    self.tableWidget_9.insertRow(i)
-                    self.tableWidget_9.setItem(0, i, QTableWidgetItem(str('')))
-            except:
+        try:
+            scene = QtWidgets.QGraphicsScene()
+            self.graphicsView_2.setScene(scene)
+            self.lineEdit_4.clear()
+            number_str = self.lineEdit_3.text()
+            if number_str != '' and int(number_str) > 0:
+                try:
+                    n = int(number_str)
+                    for i in range(n):
+                        self.tableWidget_9.setRowCount(i)
+                        self.tableWidget_9.insertRow(i)
+                        self.tableWidget_9.setItem(0, i, QTableWidgetItem(str('')))
+                except:
+                    QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+            else:
                 QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
-        else:
-            QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+        except:
+            QMessageBox.information(self, "Warning", "Invalid input, make sure  processes number is not float or empty!")
 
 
 
@@ -619,14 +642,18 @@ class Main(QMainWindow , MainUI):
             timer = Decimal('0.00')
             s = 0
             for i in range(n):
-                processes.append(self.tableWidget_9.item(i, 0).text())
-                if int(self.tableWidget_9.item(i, 1).text()) >= 0:
+                if self.tableWidget_9.item(i, 0).text() not in processes:
+                    processes.append(self.tableWidget_9.item(i, 0).text())
+                else:
+                    QMessageBox.information(self, "Warning", "Repeated processes are not allowed !")
+                    return
+                if Decimal(self.tableWidget_9.item(i, 1).text()) >= 0:
                     arrival_time.append(Decimal(self.tableWidget_9.item(i, 1).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, Please enter positive 'Arrival Time' !")
                     return
 
-                if int(self.tableWidget_9.item(i, 2).text()) > 0:
+                if Decimal(self.tableWidget_9.item(i, 2).text()) > 0:
                     burst_time.append(Decimal(self.tableWidget_9.item(i, 2).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, 'Burst Time' must be higher than '0' !")
@@ -713,21 +740,24 @@ class Main(QMainWindow , MainUI):
 
 
     def Show_Info_Table_SJF_P(self):
-        scene = QtWidgets.QGraphicsScene()
-        self.graphicsView_4.setScene(scene)
-        self.lineEdit_8.clear()
-        number_str = self.lineEdit_7.text()
-        if number_str != '' and int(number_str) > 0:
-            try:
-                n = int(number_str)
-                for i in range(n):
-                    self.tableWidget_6.setRowCount(i)
-                    self.tableWidget_6.insertRow(i)
-                    self.tableWidget_6.setItem(0, i, QTableWidgetItem(str('')))
-            except:
+        try:
+            scene = QtWidgets.QGraphicsScene()
+            self.graphicsView_4.setScene(scene)
+            self.lineEdit_8.clear()
+            number_str = self.lineEdit_7.text()
+            if number_str != '' and int(number_str) > 0:
+                try:
+                    n = int(number_str)
+                    for i in range(n):
+                        self.tableWidget_6.setRowCount(i)
+                        self.tableWidget_6.insertRow(i)
+                        self.tableWidget_6.setItem(0, i, QTableWidgetItem(str('')))
+                except:
+                    QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+            else:
                 QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
-        else:
-            QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+        except:
+            QMessageBox.information(self, "Warning", "Invalid input, make sure  processes number is not float or empty!")
 
 
 
@@ -742,13 +772,17 @@ class Main(QMainWindow , MainUI):
             timer = Decimal('0.00')
             s = 0
             for i in range(n):
-                processes.append(self.tableWidget_6.item(i, 0).text())
-                if int(self.tableWidget_6.item(i, 1).text()) >= 0:
+                if self.tableWidget_6.item(i, 0).text() not in processes:
+                    processes.append(self.tableWidget_6.item(i, 0).text())
+                else:
+                    QMessageBox.information(self, "Warning", "Repeated processes are not allowed !")
+                    return
+                if Decimal(self.tableWidget_6.item(i, 1).text()) >= 0:
                     arrival_time.append(Decimal(self.tableWidget_6.item(i, 1).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, Please enter positive 'Arrival Time' !")
                     return
-                if int(self.tableWidget_6.item(i, 2).text()) > 0:
+                if Decimal(self.tableWidget_6.item(i, 2).text()) > 0:
                     burst_time.append(Decimal(self.tableWidget_6.item(i, 2).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, 'Burst Time' must be higher than '0' !")
@@ -852,21 +886,24 @@ class Main(QMainWindow , MainUI):
 
 
     def Show_info_Table_Priority_P(self):
-        scene = QtWidgets.QGraphicsScene()
-        self.graphicsView_6.setScene(scene)
-        self.lineEdit_12.clear()
-        number_str = self.lineEdit_11.text()
-        if number_str != '' and int(number_str) > 0:
-            try:
-                n = int(number_str)
-                for i in range(n):
-                    self.tableWidget_8.setRowCount(i)
-                    self.tableWidget_8.insertRow(i)
-                    self.tableWidget_8.setItem(0, i, QTableWidgetItem(str('')))
-            except:
+        try:
+            scene = QtWidgets.QGraphicsScene()
+            self.graphicsView_6.setScene(scene)
+            self.lineEdit_12.clear()
+            number_str = self.lineEdit_11.text()
+            if number_str != '' and int(number_str) > 0:
+                try:
+                    n = int(number_str)
+                    for i in range(n):
+                        self.tableWidget_8.setRowCount(i)
+                        self.tableWidget_8.insertRow(i)
+                        self.tableWidget_8.setItem(0, i, QTableWidgetItem(str('')))
+                except:
+                    QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+            else:
                 QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
-        else:
-            QMessageBox.information(self, "Warning", "Invalid input, Please enter number of processes")
+        except:
+            QMessageBox.information(self, "Warning", "Invalid input, make sure  processes number is not float or empty!")
 
 
     def Priority_P_Algorithm(self):
@@ -881,16 +918,20 @@ class Main(QMainWindow , MainUI):
             timer = Decimal('0.00')
             s = 0
             for i in range(n):
-                processes.append(self.tableWidget_8.item(i, 0).text())
-                if int(self.tableWidget_8.item(i, 1).text()) >= 0:
+                if self.tableWidget_8.item(i, 0).text() not in processes:
+                    processes.append(self.tableWidget_8.item(i, 0).text())
+                else:
+                    QMessageBox.information(self, "Warning", "Repeated processes are not allowed !")
+                    return
+                if Decimal(self.tableWidget_8.item(i, 1).text()) >= 0:
                     arrival_time.append(Decimal(self.tableWidget_8.item(i, 1).text()))
                 else:
                     QMessageBox.information(self, "Warning", "Invalid input, Please enter positive 'Arrival Time' !")
                     return
 
-                if int(self.tableWidget_8.item(i, 2).text()) > 0:
+                if Decimal(self.tableWidget_8.item(i, 2).text()) > 0:
                     burst_time.append(Decimal(self.tableWidget_8.item(i, 2).text()))
-                    priority.append(int(self.tableWidget_8.item(i, 3).text()))
+                    priority.append(Decimal(self.tableWidget_8.item(i, 3).text()))
                 else:
                     QMessageBox.information(self, "Warning", " Invalid input, 'Burst time' and 'Priority' must be higher than '0' !")
                     return
